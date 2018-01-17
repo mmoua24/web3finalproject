@@ -3,3 +3,12 @@ These commands will initialize a directory folder as a repository.
 *directory folder where git project is located*> git init
 > git config --global user.email "mitchell.moua24@gmail.com"
 > git config --global user.name "Mitchell Moua"
+
+> git remote add origin https://github.com/mmoua24/web3finalproject.git
+	*this command links the corresponding .git repository on github.com as the remote repository"
+
+> git push -u origin master
+	*this command pushes all committed changes in the local repository through to the remote repository"
+
+> git checkout <commit #>
+	*restores the repository to the specified commit
