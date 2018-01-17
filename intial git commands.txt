@@ -1,0 +1,5 @@
+These commands will initialize a directory folder as a repository.
+
+*directory folder where git project is located*> git init
+> git config --global user.email "mitchell.moua24@gmail.com"
+> git config --global user.name "Mitchell Moua"
