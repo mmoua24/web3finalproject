@@ -1,3 +1,57 @@
+<?php
+    if (isset($_GET['submit'])){
+        $userHead = $_GET["head"];
+        $userChest = $_GET["chest"];
+        $userArms = $_GET["arms"];
+        $userWaist = $_GET["waist"];
+        $userLegs = $_GET["legs"];
+    }
+
+    $armorSkills = [
+        "DivineBlessing" => 0,
+        "EvadeWindow" => 0,
+        "Airborne" => 0,
+        "IceAttack" => 0,
+        "IceResistance" => 0,
+        "BleedResistance" => 0,
+        "SpeedSharpening" => 0,
+        "Constitution" => 0,
+        "CriticalEye" => 0,
+        "QuickSheathe" => 0,
+    ];
+
+    function tallyHead(){
+        switch($userHead){
+            case "odog": $armorSkills["BleedResistance"]++; break;
+            case "legi": $armorSkills["DivineBlessing"]++; break;
+        }
+    }
+
+    function tally(){
+        switch($userHead){
+            case "odog": $armorSkills["BleedResistance"]++; break;
+            case "legi": $armorSkills["DivineBlessing"]++; break;
+        }
+        switch($userChest){
+            case "odog": $armorSkills["SpeedSharpening"]++; break;
+            case "legi": $armorSkills["EvadeWindow"]++; break;
+        }
+        switch($userArms){
+            case "odog": $armorSkills["Constitution"]++; break;
+            case "legi": $armorSkills["Airborne"]++; break;
+        }
+        switch($userWaist){
+            case "odog": $armorSkills["CriticalEye"]++; break;
+            case "legi": $armorSkills["IceAttack"]++; break;
+        }
+        switch($userlegs){
+            case "odog": $armorSkills["QuickSheathe"]++; break;
+            case "legi": $armorSkills["IceResistance"]++; break;
+        }
+    }
+
+?>
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
@@ -5,91 +59,78 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>MHW Toolkit: draft</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+    <table class="dressup">
+        <form method="GET">
+            <tr>
+            <td>
+                Head:
+                <select name="head">
+                    <option value="leather">Leather</option>
+                    <option value="odog">Odogaron</option>
+                    <option value="legi">Legiana</option>
+                </select>
+                <?php //tallyHead(); ?>
+            </td>
+            <td>
+                Chest:
+                <select name="chest">
+                    <option value="leather">Leather</option>
+                    <option value="odog">Odogaron</option>
+                    <option value="legi">Legiana</option>
+                </select>
+            </td>
+            <td>
+                Arms:
+                <select name="arms">
+                    <option value="leather">Leather</option>
+                    <option value="odog">Odogaron</option>
+                    <option value="legi">Legiana</option>
+                </select>
+            </td>
+            <td>
+                Waist:
+                <select name="waist">
+                    <option value="leather">Leather</option>
+                    <option value="odog">Odogaron</option>
+                    <option value="legi">Legiana</option>
+                </select>
+            </td>
+            <td>
+                Legs:
+                <select name="legs">
+                    <option value="leather">Leather</option>
+                    <option value="odog">Odogaron</option>
+                    <option value="legi">Legiana</option>
+                </select>
+            </td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="submit" value="Submit"></td>
+            </tr>
+        </form>
+    </table>
+    <br/>
+    <br/>
+    <table class="skillz">
+        <th>Active Armor Skills</th>
+        <tr>
+            <?php
+            /*
+                foreach($skill as $armorSkills){
+                    if ($skill > 0){
+                        echo $skill . " +" . $armorSkills[$skill];
+                    }
+                }
+            */
+            ?>
+        </tr>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
+    </table>
+
     </body>
 </html>
